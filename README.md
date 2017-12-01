@@ -25,112 +25,112 @@ rnorm(1) # return random numbers
 
 ##### Types of Variables (Section 2)
 
-> Integer
+> #### Integer
 
-> ```r
-> # Need to put a "L" behind to indicate that the value is an integer
-> x <- 2L # assigning integer value of 2 into x
-> 
-> typeof(x) # checking variable type
-> 	return "integer"
+```r
+# Need to put a "L" behind to indicate that the value is an integer
+x <- 2L # assigning integer value of 2 into x
+ 
+typeof(x) # checking variable type
+	return "integer"
 ```
 
-> Double
+> #### Double
 
-> ```r
-> y <- 2.5 # assigning double value 
-> 
-> typeof(y) # checking variable type
-> 	return "double"
+```r
+y <- 2.5 # assigning double value 
+
+typeof(y) # checking variable type
+	return "double"
 ```
 
-> Complex
+> #### Complex
 
-> ```r
-> z <- 3 + 2i # assigning complex value
-> 
-> typeof(z) # checking variable type
-> 	return "complex"
+```r
+z <- 3 + 2i # assigning complex value
+ 
+typeof(z) # checking variable type
+ 	return "complex"
 ```
 
-> Character
+> #### Character
 
-> ```r
-> a <- "b"
-> 
-> typeof(a) # checking variable type
-> 	return "character"
+```r
+a <- "b"
+ 
+typeof(a) # checking variable type
+	return "character"
 ```
 
-> Logical / Boolean
+> #### Logical / Boolean
 
-> ```r
-> isFull <- T # can put T/TRUE/F/FALSE
-> 
-> typeof(isFull) # checking variable type
-> 	return "logical"
+```r
+isFull <- T # can put T/TRUE/F/FALSE
+ 
+typeof(isFull) # checking variable type
+ 	return "logical"
 ```
 
 ##### Variable Operators
 
-> For numeral digits
+> #### For numeral digits
 
-> ```r
-> # + - / *
-> a <- 2
-> b <- 3
-> c <- 4
-> d <- a + b
-> 
-> sqrt(c) # print out 2
-> d # print out 5
+```r
+# + - / *
+a <- 2
+b <- 3
+c <- 4
+d <- a + b
+
+sqrt(c) # print out 2
+d # print out 5
 ```
 
-> For characters
+> #### For characters
 
-> ```r
-> # paste function is used to concatenate strings/characters
-> 
-> a <- "hi"
-> b <- "bob"
-> c = paste(a,b)
-> c # print out "hi bob"
+```r
+# paste function is used to concatenate strings/characters
+ 
+a <- "hi"
+b <- "bob"
+c = paste(a,b)
+c # print out "hi bob"
 ```
 
 ##### Logical Operators
 
-> ```r
-> == # equal
-> != # not equal
-> < # less than
-> > # more than
-> >= # more and equal
-> <= # less and equal
-> ! # not
-> | # or (Different from other languages)
-> & # and (Different from other lanuages)
-> isTRUE(x) # primitive function to check if the variable is TRUE
+```r 
+== # equal
+!= # not equal
+< # less than
+> # more than
+>= # more and equal
+<= # less and equal
+! # not
+| # or (Different from other languages)
+& # and (Different from other languages)
+isTRUE(x) # primitive function to check if the variable is TRUE
 ```
 
 ##### Loops & If else
 
->```r
-> # while loop
-> while(TRUE) {
-> 	print("Hello")
-> } # infinite loop
-> 
-> # for loop
-> for(i in 1:5) {
-> 	print("Hello R")
-> } # print "Hello R" 5 times
-> 
-> # if / else if
-> if (x < 10) {
-> 	print ("hello")
-> } else if (x < 20) {
-> 	print ("bye bye")
-> } else {
-> 	print ("error")
-> }
+```r
+# while loop
+while(TRUE) {
+	print("Hello")
+} # infinite loop
+ 
+# for loop
+for(i in 1:5) {
+	print("Hello R")
+} # print "Hello R" 5 times
+ 
+# if / else if
+if (x < 10) {
+	print ("hello")
+} else if (x < 20) {
+	print ("bye bye")
+} else {
+	print ("error")
+}
 ```
