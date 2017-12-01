@@ -1,7 +1,15 @@
-# R-PROGRAMMING-A-Z
+# R-PROGRAMMING-A-Z Helpsheet
 Learning R Programming
 
-##### Shortcut
+##### Content page
+* [Shortcut](#shortcut)
+* [Types of Variable](#types)
+* [Variable Operators](#operators)
+* [Logical Operators](#logicaloperators)
+* [Loops / If](#loops)
+
+
+##### Shortcut <a id="shortcut"></a>
 
 > #### Escape infinite loop 
 	
@@ -23,7 +31,7 @@ rnorm(1) # return random numbers
 # rnorm(n, mean, sd) , default mean = 0, sd = 1
 ```
 
-##### Types of Variables (Section 2)
+##### Types of Variables (Section 2)<a id="types"></a>
 
 > #### Integer
 
@@ -71,7 +79,7 @@ typeof(isFull) # checking variable type
  	return "logical"
 ```
 
-##### Variable Operators
+##### Variable Operators<a id="operators"></a>
 
 > #### For numeral digits
 
@@ -97,7 +105,7 @@ c = paste(a,b)
 c # print out "hi bob"
 ```
 
-##### Logical Operators
+##### Logical Operators<a id="logicaloperators"></a>
 
 ```r 
 == # equal
@@ -112,7 +120,7 @@ c # print out "hi bob"
 isTRUE(x) # primitive function to check if the variable is TRUE
 ```
 
-##### Loops & If else
+##### Loops & If else<a id="loops"></a>
 
 ```r
 # while loop
