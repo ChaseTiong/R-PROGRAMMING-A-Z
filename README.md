@@ -7,6 +7,8 @@ Learning R Programming
 * [Variable Operators](#operators)
 * [Logical Operators](#logicaloperators)
 * [Loops / If](#loops)
+* [Vectors](#vectors)
+* [Vectors Arithmetic](#vectorsA) 
 
 
 ##### Shortcut <a id="shortcut"></a>
@@ -142,3 +144,55 @@ if (x < 10) {
 	print ("error")
 }
 ```
+
+##### Vectors<a id="vectors"></a>
+
+```r
+# Vector in R only accept elements of the same data type
+
+# Creating a vector using primitive function combine
+vector <- c(3,43,56,732) # Creates a vector of double elements
+
+vector<- c ("a", "b", 7) # Creates a vector of character elements 
+# 7 will be auto converted to character
+
+is.numeric(vector) # Check if the variable is numeric
+is.integer(vector) # Check if the variable is integer
+is.double(vector) # Check if the variable is double
+is.character(vector) # Check if the variable is character
+
+# sequence - seq(from , to, step (default = 1))
+seq(1,15) # Creates a vector from 1 (inclusive) to 15 (inclusive)
+
+seq (1,15,2) # Creates a vector with step 2 from 1 (inclusive) to 15(inclusive)
+# 1, 3, 5, 7, 9, 11, 13, 15
+
+rep(variable, times) # Replicate
+rep(5, 10) # Creates a vector of 5,5,5 ..., 5 (10 times)
+
+# rep can be used on vector too.
+result <- rep(5,10)
+rep(result,2) # replicate vector twice
+
+# Accessing vectors elements
+
+# Index in R starts from 1
+w <- ("a", "b", "c", "d", "e")
+
+w[1] # returns value "a"
+w[2] # returns value "b"
+w[-1] # returns all values except for the specified index -> "b", "c", "d", "e"
+w[-3] # returns "a", "b", "d", "e"
+w[1:3] # returns first element to the third element -> "a", "b", "c"
+w[c(1,3,5) #returns the element of the specified index -> "a", "c", "e"
+```
+
+##### Vectors Arithmetic <a id="vectorsA"></a>
+```r
+# R is a vectorised programming language
+# Can just do normal maths arithmetic operations on two vectors
+
+# Note that : Operating on vectors of different sizes will required 
+# the size of the bigger vector to be multiples of the size of the smaller vector
+```
+
