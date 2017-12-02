@@ -7,18 +7,18 @@
 # Find out N that could result E(X) to be = 68.2%
 
 
-expX = 0
-n = 0
-numInRange = 0
+expX <- 0
+n <- 0
+numInRange <- 0
 # rounding expX to 4 decimal place
 while (round(expX, 4) != 0.6820) { # Create a while loop to stop when E(X) is 68.2%
-  n = n + 1 # Counting total number generated
-  value = rnorm(1) # Generate new random number
+  n <- n + 1 # Counting total number generated
+  value <- rnorm(1) # Generate new random number
   if (value >= -1 & value <= 1) { # check if within range
-    numInRange = numInRange + 1 # if within range, increment count 
+    numInRange <- numInRange + 1 # if within range, increment count 
   }
-  expX = numInRange / n # Calculate expected X
-  display = paste("Current expected X : ", expX)
+  expX <- numInRange / n # Calculate expected X
+  display <- paste("Current expected X : ", expX)
   print(display) # Print out current expected X while computing
 }
 

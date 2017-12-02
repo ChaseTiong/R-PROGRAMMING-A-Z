@@ -109,7 +109,7 @@ d # print out 5
  
 a <- "hi"
 b <- "bob"
-c = paste(a,b)
+c <- paste(a,b)
 c # print out "hi bob"
 ```
 
