@@ -28,9 +28,15 @@ rm(variable)
 > #### Random normal distribution number
 
 ```r
-rnorm(1) # return random numbers
+rnorm(1) # return n number of random number
 
 # rnorm(n, mean, sd) , default mean = 0, sd = 1
+```
+
+> #### To view help of the function
+```r
+?rnorm() # will display guide on the usage of the function
+
 ```
 
 ##### Types of Variables (Section 2)<a id="types"></a>
@@ -190,9 +196,13 @@ w[c(1,3,5) #returns the element of the specified index -> "a", "c", "e"
 ##### Vectors Arithmetic <a id="vectorsA"></a>
 ```r
 # R is a vectorised programming language
-# Can just do normal maths arithmetic operations on two vectors
+# Can just do normal arithmetic operations on two vectors
 
-# Note that : Operating on vectors of different sizes will required 
+# Note that : Operating on vectors of different sizes will require 
 # the size of the bigger vector to be multiples of the size of the smaller vector
+# R will clone the smaller vector multiple times and execute the arithmetic operations with the two vectors
+
+# In the case of the size of the bigger vector is not multiples of the size of 
+# the smaller vector, R will still clone the smaller vector and issue a warning to inform the user.
 ```
 
