@@ -8,7 +8,8 @@ Learning R Programming
 * [Logical Operators](#logicaloperators)
 * [Loops / If](#loops)
 * [Vectors](#vectors)
-* [Vectors Arithmetic](#vectorsA) 
+* [Vectors Arithmetic](#vectorsA)
+* [Packages](#package) 
 
 
 ##### Shortcut <a id="shortcut"></a>
@@ -206,3 +207,11 @@ w[c(1,3,5) #returns the element of the specified index -> "a", "c", "e"
 # the smaller vector, R will still clone the smaller vector and issue a warning to inform the user.
 ```
 
+##### Packages<a id="packages"></a>
+```r
+# Install package command
+install.packages("ggplot2")
+
+# To import package into R file
+library(ggplot2) 
+```
