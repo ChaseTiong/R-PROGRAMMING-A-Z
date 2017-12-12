@@ -342,7 +342,7 @@ how "a" "b" "c"
 are "a" "b" "c"
 you "a" "b" "c"
 
-Bravo["are","Y"] <- 0
+Bravo["are","Y"] <- 0 # Replacing value of Row 2 Column 2
 Bravo
     X   Y   Z  
 how "a" "b" "c"
@@ -414,6 +414,76 @@ ChrisPaul         5    6    8    8    7    5    7    6    7    7
 KevinDurant       9    9    7    9   10    9   10    9   10    9
 DerrickRose       5    5    5    7    9    9    8  NaN    6    7
 DwayneWade        9    9    9   11    9    9    8    8    8    8
+
+# Transposing Matrix 
+t(FieldGoals) # Flipping rows with columns and vice versa
 ```
 
+> #### Matrix Subsetting
+
+```r
+Games # Print out the whole matrix
+               2005 2006 2007 2008 2009 2010 2011 2012 2013 2014
+KobeBryant       80   77   82   82   73   82   58   78    6   35
+JoeJohnson       82   57   82   79   76   72   60   72   79   80
+LeBronJames      79   78   75   81   76   79   62   76   77   69
+CarmeloAnthony   80   65   77   66   69   77   55   67   77   40
+DwightHoward     82   82   82   79   82   78   54   76   71   41
+ChrisBosh        70   69   67   77   70   77   57   74   79   44
+ChrisPaul        78   64   80   78   45   80   60   70   62   82
+KevinDurant      35   35   80   74   82   78   66   81   81   27
+DerrickRose      40   40   40   81   78   81   39    0   10   51
+DwayneWade       75   51   51   79   77   76   49   69   54   62
+
+Games[1:3,5:7] # Print out the top 3 players from 2009 to 2011
+            2009 2010 2011
+KobeBryant    73   82   58
+JoeJohnson    76   72   60
+LeBronJames   76   79   62
+
+Games[,c("2009","2012")] # Extract out information for Year 2009 and 2012.
+               2009 2012
+KobeBryant       73   78
+JoeJohnson       76   72
+LeBronJames      76   76
+CarmeloAnthony   69   67
+DwightHoward     82   76
+ChrisBosh        70   74
+ChrisPaul        45   70
+KevinDurant      82   81
+DerrickRose      78    0
+DwayneWade       77   69
+
+Games[1,] # Output is shown below, the 1st column "KobeBryant" is missing
+
+2005 2006 2007 2008 2009 2010 2011 2012 2013 2014 
+  80   77   82   82   73   82   58   78    6   35 
+  
+is.matrix(Games[1,]) # False as it is returning as a vector
+is.vector(Games[1,]) # True
+
+# R automatically drops column or row of size of 1. 
+# Hence, in order to get the result in Matrix data type, we have to set the parameter drop to false.
+
+Games[1,,drop=FALSE]
+
+           2005 2006 2007 2008 2009 2010 2011 2012 2013 2014
+KobeBryant   80   77   82   82   73   82   58   78    6   35
+
+is.matrix(Games[1,,drop=FALSE]) # True
+```
+
+
 #### Matplot <a id="matplot"></a>
+
+```r
+matplot(t(FieldGoals/Games), type="b", pch=15:18, col=c(1:4,6))
+# type - what kind of plot you want, line/dots or refer to ?plot for more type info
+# pch - what kind of images you want to represent the points - dot, triangle, etc
+# col - colour
+legend("bottomleft", inset=0.01, legend=Players, col=c(1:4,6), pch=15:18, horiz=0)
+# inset - distance(s) from the margins as a fraction of the plot region when legend is placed by keyword.
+# horiz - Display the legend in horizontal format (T/F)
+
+# The above R code will draw out a line graph and compares the goals per game by each player with the legend for each player.
+```
