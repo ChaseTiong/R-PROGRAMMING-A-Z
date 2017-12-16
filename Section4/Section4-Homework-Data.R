@@ -50,6 +50,12 @@ DwayneWade_FT <- c(629,432,354,590,534,494,235,308,189,284)
 #Matrix
 #
 # <put your code here>
+FTMatrix <- rbind(KobeBryant_FT,JoeJohnson_FT,LeBronJames_FT,CarmeloAnthony_FT,
+      DwightHoward_FT,ChrisBosh_FT,ChrisPaul_FT,KevinDurant_FT,DerrickRose_FT,
+      DwayneWade_FT)
+rownames(FTMatrix) <- Players
+colnames(FTMatrix) <- Seasons
+FTMatrix
 #
 
 #Free Throw Attempts
@@ -66,4 +72,10 @@ DwayneWade_FTA <- c(803,535,467,771,702,652,297,425,258,370)
 #Matrix
 #
 # <put your code here>
+FTAMatrix <- rbind(KobeBryant_FTA,JoeJohnson_FTA,LeBronJames_FTA,CarmeloAnthony_FTA,
+                  DwightHoward_FTA,ChrisBosh_FTA,ChrisPaul_FTA,KevinDurant_FTA,DerrickRose_FTA,
+                  DwayneWade_FTA)
+rownames(FTAMatrix) <- Players
+colnames(FTAMatrix) <- Seasons
+FTAMatrix
 #
