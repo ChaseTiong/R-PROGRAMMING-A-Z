@@ -12,6 +12,7 @@ Learning R Programming
 * [Vectors Arithmetic](#vectorsA)
 * [Packages](#package) 
 * [Matrices](#matrix)
+* [Functions](#function)
 
 
 ##### Shortcut <a id="shortcut"></a>
@@ -473,7 +474,6 @@ KobeBryant   80   77   82   82   73   82   58   78    6   35
 is.matrix(Games[1,,drop=FALSE]) # True
 ```
 
-
 #### Matplot <a id="matplot"></a>
 
 ```r
@@ -486,4 +486,26 @@ legend("bottomleft", inset=0.01, legend=Players, col=c(1:4,6), pch=15:18, horiz=
 # horiz - Display the legend in horizontal format (T/F)
 
 # The above R code will draw out a line graph and compares the goals per game by each player with the legend for each player.
+```
+
+#### Functions <a id="function"></a>
+
+```r
+# Creating a function that take in data (matrix) or rows(the selected rows in the matrix)
+myplot <- function(data, rows){
+	Data <- data[rows,,drop=F]
+	matplot(t(Data), type="b", pch=15:18, col=c(1:4,6))
+	legend("bottomleft", inset=0.01, legend=Players[rows], col=c(1:4,6), pch=15:18, horiz=0)
+}
+
+myplot(Salary, 1:10)
+
+# Creating a function that take in data (matrix) or rows(the default selected rows value of the matrix is 1:10)
+myplot <- function(data, rows=1:10){
+	Data <- data[rows,,drop=F]
+	matplot(t(Data), type="b", pch=15:18, col=c(1:4,6))
+	legend("bottomleft", inset=0.01, legend=Players[rows], col=c(1:4,6), pch=15:18, horiz=0)
+}
+
+myplot(Salary, 1:2) # or we can set the rows we want instead of the default value
 ```
