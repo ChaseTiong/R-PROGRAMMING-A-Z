@@ -57,6 +57,41 @@ setwd("/Users/Chase/R-PROGRAMMING-A-Z") # to set the directory that file is loca
 stats <- read.csv("DemographicData.csv") # Read the csv file and store into variable
 ```
 
+> #### Exploring dataset
+
+```r
+nrow(stats) # Output the number of rows in the dataset
+
+ncol(stats) # Output the number of columns in the dataset
+
+head(stats, n = 10) # Output the first 10 rows of the dataset, default n = 6
+
+tail(stats, n = 8) # Output the last 8 rows of the dataset, default n = 6
+
+str(stats) # Auto convert datas into category and display in category format
+'data.frame':	195 obs. of  5 variables:
+ $ Country.Name  : Factor w/ 195 levels "Afghanistan",..: 8 1 4 2 183 6 7 5 9 10 ...
+ $ Country.Code  : Factor w/ 195 levels "ABW","AFG","AGO",..: 1 2 3 4 5 6 7 8 9 10 ...
+ $ Birth.rate    : num  10.2 35.3 46 12.9 11 ...
+ $ Internet.users: num  78.9 5.9 19.1 57.2 88 ...
+ $ Income.Group  : Factor w/ 4 levels "High income",..: 1 2 4 4 1 1 3 1 1 1 ...
+ 
+summary(stats) # Output the summary of the dataset
+               Country.Name  Country.Code   Birth.rate    Internet.users 
+ Afghanistan        :  1   ABW    :  1   Min.   : 7.90   Min.   : 0.90  
+ Albania            :  1   AFG    :  1   1st Qu.:12.12   1st Qu.:14.52  
+ Algeria            :  1   AGO    :  1   Median :19.68   Median :41.00  
+ Angola             :  1   ALB    :  1   Mean   :21.47   Mean   :42.08  
+ Antigua and Barbuda:  1   ARE    :  1   3rd Qu.:29.76   3rd Qu.:66.22  
+ Argentina          :  1   ARG    :  1   Max.   :49.66   Max.   :96.55  
+ (Other)            :189   (Other):189                                  
+              Income.Group
+ High income        :67   
+ Low income         :30   
+ Lower middle income:50   
+ Upper middle income:48  
+```
+
 ##### Types of Variables (Section 2)<a id="types"></a>
 
 > #### Integer
@@ -522,4 +557,127 @@ myplot <- function(data, rows=1:10){
 }
 
 myplot(Salary, 1:2) # or we can set the rows we want instead of the default value
+```
+
+#### DataFrames <a id="dataframe"></a>
+
+```r
+# Using $ sign - Extracting out the column
+
+stats$Internet.users # Output the rows with the name Internet.users
+
+stats#Internet.users[2] # Output the 2nd entry of the row.
+
+# Extracting out category detail information
+levels(stats$Income.Group) # Output the category and its associated name
+[1] "High income"         "Low income"          "Lower middle income"
+[4] "Upper middle income"
+
+# Basic Operations with a DataFrame
+
+# Multiply columns
+stats$Birth.rate * stats$Internet.users
+stats.$Birth.rate + stats$Internet.users
+
+# Add column
+stats$MyCalc <- stats$Birth.rate * stats$Internet.users # Adding a new column to the dataset
+
+stats$xyz <- 1:5 # Creating a vector from 1 to 5 and put into stats dataset
+# If the dataset has more than 5 rows, then it will repeatedly re-create the vector and fill up all rows.
+
+# Remove column
+stats$MyCalc <- NULL # Remove myCalc column
+stats$xyz <- NULL # Remove xyz column
+
+# Filtering Dataframes
+
+filter <- stats$Internet.users < 2 # Will create a vector and store TRUE/FALSE value for column Internet.users that has value less than 2
+stats[filter,] # Will use filter vector to extract out only the true values, in other words extracting out rows that have internet users that are less than 2
+
+stats[stats$Internet.users < 2,] # Output the same as above but using the true values from Internet.users column
+
+stats[stats$Birth.rate > 40 & stats$Internet.users < 2,] # Can use more than 1 filter to extract out rows
+
+# Create Dataframes
+
+# Method 1
+mydf <- data.frame(Countries_2012_Dataset, Codes_2012_Dataset, Regions_2012_Dataset)
+# Using data.frame function to convert the above vectors to dataframe
+# To change colname/rowname is the same shown for matrix
+
+head(mydf) # Output is shown below
+Countries_2012_Dataset Codes_2012_Dataset Regions_2012_Dataset
+1                  Aruba                ABW         The Americas
+2            Afghanistan                AFG                 Asia
+3                 Angola                AGO               Africa
+4                Albania                ALB               Europe
+5   United Arab Emirates                ARE          Middle East
+6              Argentina                ARG         The Americas
+
+# Method 2 Set the colname and create dataframe at the same time
+mydf <- data.frame(Country=Countries_2012_Dataset, Code=Codes_2012_Dataset, Region=Regions_2012_Dataset)
+head(mydf) # Output is shown below
+               Country Code       Region
+1                Aruba  ABW The Americas
+2          Afghanistan  AFG         Asia
+3               Angola  AGO       Africa
+4              Albania  ALB       Europe
+5 United Arab Emirates  ARE  Middle East
+6            Argentina  ARG The Americas
+
+# Merging Dataframes
+
+head(stats) # Output is shown below
+          Country.Name Country.Code Birth.rate Internet.users        Income.Group
+1                Aruba          ABW     10.244           78.9         High income
+2          Afghanistan          AFG     35.253            5.9          Low income
+3               Angola          AGO     45.985           19.1 Upper middle income
+4              Albania          ALB     12.877           57.2 Upper middle income
+5 United Arab Emirates          ARE     11.044           88.0         High income
+6            Argentina          ARG     17.716           59.9         High income
+
+head(mydf) # Output is shown below
+              Country Code       Region
+1                Aruba  ABW The Americas
+2          Afghanistan  AFG         Asia
+3               Angola  AGO       Africa
+4              Albania  ALB       Europe
+5 United Arab Emirates  ARE  Middle East
+6            Argentina  ARG The Americas
+
+merged <- merge(stats, mydf, by.x = "Country.Code", by.y = "Code") # Merging based on same value of its respective columns
+head(merged)
+  Country.Code         Country.Name Birth.rate Internet.users        Income.Group              Country       Region
+1          ABW                Aruba     10.244           78.9         High income                Aruba The Americas
+2          AFG          Afghanistan     35.253            5.9          Low income          Afghanistan         Asia
+3          AGO               Angola     45.985           19.1 Upper middle income               Angola       Africa
+4          ALB              Albania     12.877           57.2 Upper middle income              Albania       Europe
+5          ARE United Arab Emirates     11.044           88.0         High income United Arab Emirates  Middle East
+6          ARG            Argentina     17.716           59.9         High income            Argentina The Americas
+
+```
+
+#### QPlot <a id="qplot"></a>
+
+```r
+qplot(data=stats, x=Internet.users) 
+# Output a graph that count of internet users for each country
+
+qplot(data=stats, x=Income.Group, y=Birth.rate, size=I(3), colour=I("blue")) 
+# Output a graph while controlling the size and colour of the graph
+
+qplot(data=stats, x=Internet.users, y=Birth.rate, size=I(5), colour=Income.Group) 
+# Output a graph with legend and color following Income.Group category
+
+qplot(data=stats, x=Income.Group, y=Birth.rate, geom="boxplot") 
+# Output a boxplot graph
+
+qplot(data=stats, x=Income.Group, y=Birth.rate, shape=I(17)) 
+# Changing the shape that is used to plot on the graph , Range from 1 to 25
+
+qplot(data=stats, x=Income.Group, y=Birth.rate, shape=I(17), alpha=I(0.6)) 
+# Changing the opaque range of the graph
+
+qplot(data=stats, x=Income.Group, y=Birth.rate, shape=I(17), main ="BR vs IU") 
+# Adding title to the graph
 ```
