@@ -38,9 +38,23 @@ rnorm(1) # return n number of random number
 ```
 
 > #### To view help of the function
+
 ```r
 ?rnorm() # will display guide on the usage of the function
 
+```
+
+> #### Import Data
+
+```r
+# Method 1 : Select the file manually
+stats <- read.csv(file.choose()) # This allows the user to select the csv file to import into variable
+
+# Method 2 : Set working directory and read data
+getwd() # will return the current working directory
+
+setwd("/Users/Chase/R-PROGRAMMING-A-Z") # to set the directory that file is located at
+stats <- read.csv("DemographicData.csv") # Read the csv file and store into variable
 ```
 
 ##### Types of Variables (Section 2)<a id="types"></a>
