@@ -4,7 +4,7 @@ Learning R Programming
 ##### Content page
 * [Common usage](#shortcut)
 	* [Escaping from Infinite loop](#escape) 
-	* [Remove variable from enviornment](#remove)
+	* [Remove variable from environment](#remove)
 	* [Generate random variable through normal distribution](#random)
 	* [View help of a function](#help)
 	* [Check data type of variable](#check)
@@ -47,7 +47,12 @@ Learning R Programming
 	* [qplot](#qplot)
 	* [ggplot2](#ggplot2)
 * [Dataframes](#dataframe)
-
+	* [Dataframe operations](#dfop)
+	* [Adding Dataframe](#adddf)
+	* [Filtering Dataframe](#filterdf)
+	* [Create Dataframe](#createDF)
+	* [Merge Dataframe](#mergeDF)	
+* [Factors](#factor)
 
 ##### Common usage <a id="shortcut"></a>
 
@@ -652,6 +657,68 @@ s + geom_histogram(binwidth=10, aes(fill=Genre), colour="Black")
 # Drawing density chart
 s <- ggplot(data=movies, aes(x=BudgetMillions))
 s + geom_density(aes(fill=Genre), position="stack")
+
+u <- ggplot(data=movies, aes(x=CriticRating, y=AudienceRating, colour=Genre))
+u + geom_point() # Create a scatter plot graph
+u + geom_point() + geom_smooth(fill=NA) # Create a scatter plot graph with line drawn to follow the thrend
+
+# Drawing boxplots
+u <- ggplot(data=movies, aes(x=Genre, y=AudienceRating, colour=Genre))
+u + geom_boxplot()
+u + geom_boxplot(size=1.2) # draw box plot with thicker lines
+u + geom_boxplot(size=1.2) + geom_jitter() # draw box plot with all the points plotted
+
+# Using facets
+w <- ggplot(data=movies, aes(x=CriticRating, y=AudienceRating, colour=Genre))
+
+w + geom_point(size=3) + facet_grid(Genre~.) # Split by Genre as row
+
+w + geom_point(size=3) + facet_grid(.~Year) # Split by Year as column
+
+w + geom_point(size=3) + facet_grid(Genre~Year) # Split by Genre as row and Year as col
+
+w + geom_point(size=3) + + geom_smooth(fill=NA) + facet_grid(Genre~Year) # Split by Genre as row and Year as col with thrend line
+
+# Adding and formatting axes labels
+w + 
+	xlab("X axis") +
+	ylab("Y axis") +
+	theme(axis.title.x = element_text(colour="DarkGreen", size=30),
+			axis.title.y = element_text(colour="Red", size=30),
+			axis.text.x = element_text(size=20),
+			axis.text.y = element_text(size=20))
+			
+# Formatting Legend
+w + 
+	xlab("X axis") +
+	ylab("Y axis") +
+	theme(axis.title.x = element_text(colour="DarkGreen", size=30),
+			axis.title.y = element_text(colour="Red", size=30),
+			axis.text.x = element_text(size=20),
+			axis.text.y = element_text(size=20),
+			
+			legend.title = element_text(size=30),
+			legend.text = element_text(size=20),
+			legend.position = c(1,1),
+			legend.justification = c(1,1))
+			
+# Adding & Formatting title
+w + 
+	xlab("X axis") +
+	ylab("Y axis") +
+	theme(axis.title.x = element_text(colour="DarkGreen", size=30),
+			axis.title.y = element_text(colour="Red", size=30),
+			axis.text.x = element_text(size=20),
+			axis.text.y = element_text(size=20),
+			
+			legend.title = element_text(size=30),
+			legend.text = element_text(size=20),
+			legend.position = c(1,1),
+			legend.justification = c(1,1), 
+			
+			plot.title = element_text(colour="DarkBlue",
+											size=40,
+											family="Courier"))
 ```
 
 #### Functions <a id="function"></a>
@@ -689,13 +756,19 @@ stats#Internet.users[2] # Output the 2nd entry of the row.
 levels(stats$Income.Group) # Output the category and its associated name
 [1] "High income"         "Low income"          "Lower middle income"
 [4] "Upper middle income"
+```
 
-# Basic Operations with a DataFrame
+> #### Basic Operations with a DataFrame <a id="dfop"></a>
 
+```r
 # Multiply columns
 stats$Birth.rate * stats$Internet.users
 stats.$Birth.rate + stats$Internet.users
+```
 
+> #### Adding Columns and Rows <a id="addDF"></a>
+
+```r
 # Add column
 stats$MyCalc <- stats$Birth.rate * stats$Internet.users # Adding a new column to the dataset
 
@@ -705,18 +778,22 @@ stats$xyz <- 1:5 # Creating a vector from 1 to 5 and put into stats dataset
 # Remove column
 stats$MyCalc <- NULL # Remove myCalc column
 stats$xyz <- NULL # Remove xyz column
+```
 
-# Filtering Dataframes
+> #### Filtering Dataframes <a id="filterDF"></a>
 
+```r
 filter <- stats$Internet.users < 2 # Will create a vector and store TRUE/FALSE value for column Internet.users that has value less than 2
 stats[filter,] # Will use filter vector to extract out only the true values, in other words extracting out rows that have internet users that are less than 2
 
 stats[stats$Internet.users < 2,] # Output the same as above but using the true values from Internet.users column
 
 stats[stats$Birth.rate > 40 & stats$Internet.users < 2,] # Can use more than 1 filter to extract out rows
+```
 
-# Create Dataframes
+> #### Create Dataframes <a id="createDF"></a>
 
+```r
 # Method 1
 mydf <- data.frame(Countries_2012_Dataset, Codes_2012_Dataset, Regions_2012_Dataset)
 # Using data.frame function to convert the above vectors to dataframe
@@ -741,9 +818,11 @@ head(mydf) # Output is shown below
 4              Albania  ALB       Europe
 5 United Arab Emirates  ARE  Middle East
 6            Argentina  ARG The Americas
+```
 
-# Merging Dataframes
+> #### Merging Dataframes <a id="mergeDF"></a>
 
+```r
 head(stats) # Output is shown below
           Country.Name Country.Code Birth.rate Internet.users        Income.Group
 1                Aruba          ABW     10.244           78.9         High income
@@ -771,7 +850,6 @@ head(merged)
 4          ALB              Albania     12.877           57.2 Upper middle income              Albania       Europe
 5          ARE United Arab Emirates     11.044           88.0         High income United Arab Emirates  Middle East
 6          ARG            Argentina     17.716           59.9         High income            Argentina The Americas
-
 ```
 
 #### Factors <a id="factor"></a>
