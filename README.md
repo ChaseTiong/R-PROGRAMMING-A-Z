@@ -1,7 +1,7 @@
 # R-PROGRAMMING-A-Z Helpsheet
 Learning R Programming
 
-##### Content page
+##### Shortcut
 * [Common usage](#shortcut)
 	* [Escaping from Infinite loop](#escape) 
 	* [Remove variable from environment](#remove)
@@ -671,13 +671,17 @@ u + geom_boxplot(size=1.2) + geom_jitter() # draw box plot with all the points p
 # Using facets
 w <- ggplot(data=movies, aes(x=CriticRating, y=AudienceRating, colour=Genre))
 
-w + geom_point(size=3) + facet_grid(Genre~.) # Split by Genre as row
+# Split by Genre as row
+w + geom_point(size=3) + facet_grid(Genre~.) 
 
-w + geom_point(size=3) + facet_grid(.~Year) # Split by Year as column
+# Split by Year as column
+w + geom_point(size=3) + facet_grid(.~Year) 
 
-w + geom_point(size=3) + facet_grid(Genre~Year) # Split by Genre as row and Year as col
+# Split by Genre as row and Year as col
+w + geom_point(size=3) + facet_grid(Genre~Year) 
 
-w + geom_point(size=3) + + geom_smooth(fill=NA) + facet_grid(Genre~Year) # Split by Genre as row and Year as col with thrend line
+# Split by Genre as row and Year as col with trend line
+w + geom_point(size=3) + + geom_smooth(fill=NA) + facet_grid(Genre~Year) 
 
 # Adding and formatting axes labels
 w + 
@@ -716,15 +720,13 @@ w +
 			legend.position = c(1,1),
 			legend.justification = c(1,1), 
 			
-			plot.title = element_text(colour="DarkBlue",
-											size=40,
-											family="Courier"))
+			plot.title = element_text(colour="DarkBlue", size=40, family="Courier"))
 ```
 
 #### Functions <a id="function"></a>
 
 ```r
-# Creating a function that take in data (matrix) or rows(the selected rows in the matrix)
+# Creating a function that take in data (matrix) or rows (the selected rows)
 myplot <- function(data, rows){
 	Data <- data[rows,,drop=F]
 	matplot(t(Data), type="b", pch=15:18, col=c(1:4,6))
