@@ -36,7 +36,17 @@ Learning R Programming
 	* [Install Package](#package)
 	* [Using package's library](#library)
 * [Matrices](#matrix)
-* [Functions](#function)
+	* [Creating Matrix using row/col bind](#createM)
+	* [Naming Matrix rows & cols](#namingM)
+	* [Accessing Matrix elements](#accessM)
+	* [Matrix Arithmetic](#matrixA)
+	* [Matrix Subsetting](#subset)
+* [Creating Functions](#function)
+* [Graph](#graph)
+	* [Matplot](#matplot)
+	* [qplot](#qplot)
+	* [ggplot2](#ggplot2)
+* [Dataframes](#dataframe)
 
 
 ##### Common usage <a id="shortcut"></a>
@@ -420,7 +430,7 @@ D # Below is the output of D
 
 ```
 
-> #### Naming Matrix Rows & Columns
+> #### Naming Matrix Rows & Columns<a id="namingM"></a>
 
 ```r
 v <- rep(c("a","b","c"),each=3)
@@ -453,7 +463,7 @@ colnames(Bravo) # [1] "X" "Y" "Z"
 
 ```
 
-> #### Accessing matrix entries
+> #### Accessing matrix entries<a id="accessM"></a>
 
 ```r
 # Accessing matrix row
@@ -469,7 +479,7 @@ A[1,1] # Accessing element of first row and first column
 A[3,3] # Accessing element of third row and third column
 ```
 
-> #### Matrix Arithmetic
+> #### Matrix Arithmetic<a id="matrixA"></a>
 
 ```r
 # Same as vector, we can just do normal mathematics Arithmetic in R.
@@ -518,7 +528,7 @@ DwayneWade        9    9    9   11    9    9    8    8    8    8
 t(FieldGoals) # Flipping rows with columns and vice versa
 ```
 
-> #### Matrix Subsetting
+> #### Matrix Subsetting<a id="subset"></a>
 
 ```r
 Games # Print out the whole matrix
@@ -571,8 +581,9 @@ KobeBryant   80   77   82   82   73   82   58   78    6   35
 
 is.matrix(Games[1,,drop=FALSE]) # True
 ```
+#### Graph <a id="graph"></a>
 
-#### Matplot <a id="matplot"></a>
+> #### Matplot <a id="matplot"></a>
 
 ```r
 matplot(t(FieldGoals/Games), type="b", pch=15:18, col=c(1:4,6))
@@ -584,6 +595,63 @@ legend("bottomleft", inset=0.01, legend=Players, col=c(1:4,6), pch=15:18, horiz=
 # horiz - Display the legend in horizontal format (T/F)
 
 # The above R code will draw out a line graph and compares the goals per game by each player with the legend for each player.
+```
+
+> #### QPlot <a id="qplot"></a>
+
+```r
+qplot(data=stats, x=Internet.users) 
+# Output a graph that count of internet users for each country
+
+qplot(data=stats, x=Income.Group, y=Birth.rate, size=I(3), colour=I("blue")) 
+# Output a graph while controlling the size and colour of the graph
+
+qplot(data=stats, x=Internet.users, y=Birth.rate, size=I(5), colour=Income.Group) 
+# Output a graph with legend and color following Income.Group category
+
+qplot(data=stats, x=Income.Group, y=Birth.rate, geom="boxplot") 
+# Output a boxplot graph
+
+qplot(data=stats, x=Income.Group, y=Birth.rate, shape=I(17)) 
+# Changing the shape that is used to plot on the graph , Range from 1 to 25
+
+qplot(data=stats, x=Income.Group, y=Birth.rate, shape=I(17), alpha=I(0.6)) 
+# Changing the opaque range of the graph
+
+qplot(data=stats, x=Income.Group, y=Birth.rate, shape=I(17), main ="BR vs IU") 
+# Adding title to the graph
+```
+
+> #### ggplot2 <a id="ggplot2"></a>
+
+```r
+# Remember to use ggplot libray first [library(ggplot2)]
+ggplot(data=movies, aes(x=CriticRating, y=AudienceRating)) # No output
+
+# add geometry (Will output into scatterplot graph)
+ggplot(data=movies, aes(x=CriticRating, y=AudienceRating)) + geom_point()
+
+# add colour (Color the points based on genre column)
+ggplot(data=movies, aes(x=CriticRating, y=AudienceRating, colour=Genre)) + geom_point()
+
+# add size (Size depend on genre column)
+ggplot(data=movies, aes(x=CriticRating, y=AudienceRating,colour=Genre, size=BudgetMillions)) + geom_point()
+
+# Changing the x-axis 
+q <- ggplot(data=movies, aes(x=CriticRating, y=AudienceRating,colour=Genre, size=BudgetMillions))
+q + geom_point(aes(x=BudgetMillions)) + xlab("Budget Millions $$$")
+
+# Drawing histogram
+s <- ggplot(data=movies, aes(x=BudgetMillions))
+s + geom_histogram(binwidth=10)
+
+# Adding color to histogram
+s <- ggplot(data=movies, aes(x=BudgetMillions))
+s + geom_histogram(binwidth=10, aes(fill=Genre), colour="Black")
+
+# Drawing density chart
+s <- ggplot(data=movies, aes(x=BudgetMillions))
+s + geom_density(aes(fill=Genre), position="stack")
 ```
 
 #### Functions <a id="function"></a>
@@ -704,31 +772,6 @@ head(merged)
 5          ARE United Arab Emirates     11.044           88.0         High income United Arab Emirates  Middle East
 6          ARG            Argentina     17.716           59.9         High income            Argentina The Americas
 
-```
-
-#### QPlot <a id="qplot"></a>
-
-```r
-qplot(data=stats, x=Internet.users) 
-# Output a graph that count of internet users for each country
-
-qplot(data=stats, x=Income.Group, y=Birth.rate, size=I(3), colour=I("blue")) 
-# Output a graph while controlling the size and colour of the graph
-
-qplot(data=stats, x=Internet.users, y=Birth.rate, size=I(5), colour=Income.Group) 
-# Output a graph with legend and color following Income.Group category
-
-qplot(data=stats, x=Income.Group, y=Birth.rate, geom="boxplot") 
-# Output a boxplot graph
-
-qplot(data=stats, x=Income.Group, y=Birth.rate, shape=I(17)) 
-# Changing the shape that is used to plot on the graph , Range from 1 to 25
-
-qplot(data=stats, x=Income.Group, y=Birth.rate, shape=I(17), alpha=I(0.6)) 
-# Changing the opaque range of the graph
-
-qplot(data=stats, x=Income.Group, y=Birth.rate, shape=I(17), main ="BR vs IU") 
-# Adding title to the graph
 ```
 
 #### Factors <a id="factor"></a>
